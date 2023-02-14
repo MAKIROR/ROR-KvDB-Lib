@@ -1,4 +1,4 @@
-pub use store::kv::DataStore;
+pub use store::kv::{DataStore,Value};
 pub use client::Client;
 
 mod store;

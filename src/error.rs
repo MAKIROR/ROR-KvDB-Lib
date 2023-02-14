@@ -7,7 +7,7 @@ pub enum RorError {
     IOError(#[from] std::io::Error),
     #[error("{0}")]
     BincodeError(#[from] Box<bincode::ErrorKind>),
-    #[error("Error from storage module :{0}")]
+    #[error("{0}")]
     KvError(#[from] KvError),
 
     #[error("Incorrect argument to command '{0}'")]
