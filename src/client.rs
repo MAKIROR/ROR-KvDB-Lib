@@ -3,6 +3,7 @@ use std::{
     io::{
         Read,
         Write,
+        ErrorKind,
     },
 };
 use super::{
@@ -61,7 +62,15 @@ impl Client {
         }
 
         let mut size_buffer = [0 as u8; USIZE_SIZE];
-        self.stream.read_exact(&mut size_buffer)?;
+        match self.stream.read_exact(&mut size_buffer) {
+            Ok(_) => (),
+            Err(e) => {
+                if e.kind() == ErrorKind::UnexpectedEof {
+                    return Err(RorError::AbnormalConnection);
+                }
+                return Err(RorError::IOError(e));
+            }
+        }
         let reply_size = usize::from_be_bytes(size_buffer);
         let mut reply_buffer = vec![0; reply_size];
         self.stream.read_exact(&mut reply_buffer)?;

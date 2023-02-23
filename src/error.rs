@@ -32,6 +32,8 @@ pub enum RorError {
     ServerError,
     #[error("Unable to communicate with the server, the connection may be interrupted, you can try to reconnect or check the server")]
     ConnectionLost,
+    #[error("Unable to communicate with server, possibly high latency or lost connection, please try this operation again")]
+    AbnormalConnection,
     #[error("Unable to parse data, probably it is incomplete")]
     IncompleteData,
     #[error("User '{0}' not found")]
