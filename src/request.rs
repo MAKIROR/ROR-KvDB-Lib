@@ -29,12 +29,14 @@ pub enum ConnectError {
     ServerError,
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Debug, Clone)]
 pub enum OperateRequest {
     Get { key: String },
     Add { key: String, value: Value },
     Delete { key: String },
-    CreateUser { username: String, password: String, level: String },
+    CreateUser { name: String, password: String, level: String },
+    DeleteUser { name: String },
+    GetType { key: String },
     Compact,
     Quit,
 }
@@ -42,6 +44,7 @@ pub enum OperateRequest {
 #[derive(Serialize, Deserialize)]
 pub enum OperateResult {
     Found(Value),
+    Type(String),
     Success,
     PermissionDenied,
     KeyNotFound,

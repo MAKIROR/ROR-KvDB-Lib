@@ -20,6 +20,10 @@ pub enum KvError {
     DecodeUtf8Error(#[from] FromUtf8Error),
     #[error("{0}")]
     SliceDecodeError(#[from] TryFromSliceError),
+    #[error("{0}")]
+    TomlDeError(#[from] toml::de::Error),
+    #[error("{0}")]
+    TomlSeError(#[from] toml::ser::Error),
     #[error("Cannot convert '{0}' to {1}")]
     ConvertError(String,String),
     #[error("Incorrect argument to command '{0}'")]

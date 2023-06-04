@@ -1,7 +1,8 @@
 pub use store::kv::{DataStore,Value};
 pub use client::Client;
 
-mod store;
-mod client;
+pub mod store;
+pub mod client;
 mod request;
 mod error;
+mod cmd;
